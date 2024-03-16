@@ -1,0 +1,2 @@
+build/arduino.avr.nano/*.elf
+build/arduino.avr.nano/*.bin
