@@ -50,9 +50,10 @@
 # Preparation
 1. Connect the Arduino nano to your PC via USB and write the compiled sketch using the Arduino IDE, or write a HEX file using PlatformIO or AVR writer.
 2. After turning on the main power switch, adjust the voltage to 12V by turning the semi-fixed resistor of the MT3608DCDC converter module while measuring the voltage with a tester. If you don't have a tester, you can also press and hold the SELECT/ENTER button while turning on the power switch or resetting to activate the settings change mode and display the voltage.
+3. Set the jumper pin for JP1 (socket power LED operation). When 1-2 are shorted, the light turns on when ON, when 2-3 are shorted, the light turns on when OFF, and when the jumper pin is removed, the light is always off.
 
 # How it works
-0. Connect the AC adapter (center positive, 7V to 12V) to the DC jack. Although it can be operated by connecting a 5V power supply or PC to the Arduino nano's USB connector, we recommend using an AC adapter.
+0. Connect the ACDC adapter (center positive, 9V to 12V) to the DC jack. Although it can be operated by connecting a 5V power supply or PC to the Arduino nano's USB connector, we recommend using an ACDC adapter.
 1. Turn off socket power switch, then insert DRAM under test into the socket. Insert into SOCKET0 for 4116, SOCKET1 for 4164/41256/4532, SOCKET2 for 4416/4464, and SOCKET3 for 44256. *Please note that if you insert a DRAM other than 4116 type into SOCKET0, it will be damaged.
 2. Turn on socket power switch, check the LCD display, and select DRAM model number by pressing SELECT/ENTER button. The socket into which the DRAM should be inserted will also be displayed on the LCD, so check that it is correct.
 3. Press and hold the SELECT/ENTER button to start the test. *For safety reasons, the buttons cannot be operated while the socket power switch is off.
@@ -65,7 +66,7 @@ By holding down the SELECT/ENTER button and turning on the main power switch, yo
 - 4bit DRAM Test: Select whether to test 4bit DRAM with priority given to speed ("Speedy") or strictly ("Strict").
 - Power5V Voltage: Check the voltage of the 5V power supply and select whether to abort the test ("Check") or ignore it and continue the test ("Ignore") if the voltage is abnormal. In the case of USB power, the voltage of the power supply may drop and the test may not be performed correctly.
 - Erase EEPROM: You can initialize the settings by erasing the contents of the EEPROM (values for correction, etc. remain). When erasing is complete, you will be forced to exit the settings change mode.
-- View Power12V: Displays voltage of 12V power supply and voltage error. If 12V power supply voltage is not appropriate, the 4116 DRAM cannot be tested. Please reset when exiting.
+- View Power12V: Displays voltage of 12V power supply and voltage error. If 12V power supply voltage is not appropriate, the 4116 DRAM cannot be tested. Please reset when exiting. *Voltage cannot be displayed if the socket power is turned off.
 - View Button & Power5V: Displays button test and 5V power status. Please reset when exiting.
 - Save and Exit: Save the changes, exit setting change mode, and proceed to normal DRAM model number selection. Changes will not be saved unless you exit setting change mode. If you do not want to save, you can avoid saving by resetting without making a decision with this item.
 
