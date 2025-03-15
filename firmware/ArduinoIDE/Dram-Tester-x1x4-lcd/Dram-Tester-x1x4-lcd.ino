@@ -5,10 +5,10 @@
 
 // #define _DEBUG			// Debug Function enable
 // #define _DEMO_MODE		// Demo Mode firmware
-// #define _BUS_A9_ENABLE	// Adress bus bit9 (PD1) enable (Not tested.)
-// #define _4M_DRAM_ENABLE // 4M(1024Kx4) DRAM support enable. (Not tested & _BUS_A9_ENABLE required.)
+// #define _BUS_A9_ENABLE  // Adress bus bit9 (PD1) enable
+// #define _4M_DRAM_ENABLE  // 4M(1024Kx4) DRAM support enable. (_BUS_A9_ENABLE required.)
 
-#define VERSION_STRING "0.0.0"
+#define VERSION_STRING "1.0.0"
 #define NAME_STRING "DRAM-Tester"
 #define SUBNAME_STRING "x1/x4"
 
@@ -146,7 +146,8 @@ int8_t dramConfig;
 int8_t settingMode;
 byte lastBtn;
 unsigned long pressedTime;
-int8_t abus_size, nocol, colshift, colset;
+int8_t abus_size, nocol, colshift;
+int colset, rowset;
 bool speedyTest4bit, checkPowerGood5V;
 int16_t calibrationValue;
 bool powerGood12v, powerGood5v;
@@ -200,7 +201,7 @@ void setup(void)
 	checkPowerGood5V = (EEPROM.read(EEPROM_IDX_POWSRCCHKFLG) != 0);
 
 	EEPROM.get(EEPROM_IDX_CALIBVAL, calibrationValue);
-	calibrationValue = calibrationValue > (VOLTAGE_3V3_MAX * ANALOG_RESORUTION) || calibrationValue < (VOLTAGE_3V3_MIN * ANALOG_RESORUTION) ? (VOLTAGE_3V3_RATED * ANALOG_RESORUTION) : calibrationValue;
+	calibrationValue = calibrationValue > (int16_t)(VOLTAGE_3V3_MAX * ANALOG_RESORUTION) || calibrationValue < (int16_t)(VOLTAGE_3V3_MIN * ANALOG_RESORUTION) ? (int16_t)(VOLTAGE_3V3_RATED * ANALOG_RESORUTION) : calibrationValue;
 	lastBtn = pseudoDigitalRead(BUTTON);
 	if (lastBtn == LOW)
 	{ // button is pressed
@@ -372,7 +373,7 @@ void loop(void)
 		}
 		break;
 	case SCENE_DRAM_TEST:
-		EEPROM.update(0, dramConfig);
+		EEPROM.update(EEPROM_IDX_DRAMCONF, dramConfig);
 #ifndef _DEMO_MODE
 		startDramTest();
 #else

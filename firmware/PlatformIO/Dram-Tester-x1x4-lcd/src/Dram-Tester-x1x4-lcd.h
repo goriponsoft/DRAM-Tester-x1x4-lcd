@@ -5,10 +5,10 @@
 
 // #define _DEBUG			// Debug Function enable
 // #define _DEMO_MODE		// Demo Mode firmware
-// #define _BUS_A9_ENABLE	// Adress bus bit9 (PD1) enable (Not tested.)
-// #define _4M_DRAM_ENABLE // 4M(1024Kx4) DRAM support enable. (Not tested & _BUS_A9_ENABLE required.)
+//#define _BUS_A9_ENABLE	// Adress bus bit9 (PD1) enable
+//#define _4M_DRAM_ENABLE	// 4M(1024Kx4) DRAM support enable. (_BUS_A9_ENABLE required.)
 
-#define VERSION_STRING "0.0.0"
+#define VERSION_STRING "1.0.0"
 #define NAME_STRING "DRAM-Tester"
 #define SUBNAME_STRING "x1/x4"
 
@@ -138,7 +138,8 @@ extern int8_t dramConfig;
 extern int8_t settingMode;
 extern byte lastBtn;
 extern unsigned long pressedTime;
-extern int8_t abus_size, nocol, colshift, colset;
+extern int8_t abus_size, nocol, colshift;
+extern int colset, rowset;
 extern bool speedyTest4bit, checkPowerGood5V;
 extern int16_t calibrationValue;
 extern bool powerGood12v, powerGood5v;

@@ -113,8 +113,13 @@ inline int getDataBus1(void)
 
 inline void enableDramBus(void)
 {
+#ifndef _BUS_A9_ENABLE
 	// PD2-PD7 Output, PD0-PD1 keep state
 	DDRD |= DRAM_A_PD_MASK | DRAM_RAS_PD_MASK | DRAM_CAS_PD_MASK | DRAM_W_PD_MASK;
+#else
+	// PD1-PD7 Output, PD0 keep state
+	DDRD |= DRAM_A_PD_MASK | DRAM_RAS_PD_MASK | DRAM_CAS_PD_MASK | DRAM_W_PD_MASK | DRAM_A9_PD_MASK;
+#endif
 	// PD2-PD4 HIGH, PD0-PD1 & PD5-PD7 keep state
 	PORTD |= DRAM_W_PD_MASK | DRAM_CAS_PD_MASK | DRAM_RAS_PD_MASK;
 	// PB0-PB5 Output, other bits keep state
@@ -123,10 +128,6 @@ inline void enableDramBus(void)
 	PORTC &= ~DRAM_DQ_PC_MASK;
 	// PC0-PC3 Input, PC4-PC5 & other bits keep state
 	DDRC &= ~DRAM_DQ_PC_MASK;
-#ifdef _BUS_A9_ENABLE
-	// PD1 Output, PD0 & PD2-PD7 keep state
-	DDRD |= DRAM_A9_PD_MASK;
-#endif
 	/*
 	for (int pin = 2; pin < 14; pin++)
 		pinMode(pin, OUTPUT);
@@ -143,10 +144,17 @@ inline void enableDramBus(void)
 
 inline void disableDramBus(void)
 {
+#ifndef _BUS_A9_ENABLE
 	// PD2-PD7 Not pull-up, PD0-1 keep state
 	PORTD &= ~(DRAM_A_PD_MASK | DRAM_RAS_PD_MASK | DRAM_CAS_PD_MASK | DRAM_W_PD_MASK);
 	// PD2-PD7 Input, PD0-1 keep state
 	DDRD &= ~(DRAM_A_PD_MASK | DRAM_RAS_PD_MASK | DRAM_CAS_PD_MASK | DRAM_W_PD_MASK);
+#else
+	// PD1-PD7 Not pull-up, PD0-1 keep state
+	PORTD &= ~(DRAM_A_PD_MASK | DRAM_RAS_PD_MASK | DRAM_CAS_PD_MASK | DRAM_W_PD_MASK | DRAM_A9_PD_MASK);
+	// PD1-PD7 Input, PD0 keep state
+	DDRD &= ~(DRAM_A_PD_MASK | DRAM_RAS_PD_MASK | DRAM_CAS_PD_MASK | DRAM_W_PD_MASK | DRAM_A9_PD_MASK);
+#endif
 	// PB0-PB5 Not pull-up, other bits keep state
 	PORTB &= ~DRAM_A_PB_MASK;
 	// PB0-PB5 Input, other bits keep state
@@ -155,12 +163,6 @@ inline void disableDramBus(void)
 	PORTC &= ~DRAM_DQ_PC_MASK;
 	// PC0-PC3 Input, PC4-PC5 & other bits keep state
 	DDRC &= ~DRAM_DQ_PC_MASK;
-#ifdef _BUS_A9_ENABLE
-	// PD1 Not pull-up, PD0 & PD2-PD7 keep state
-	PORTD &= ~DRAM_A9_PD_MASK;
-	// PD1 Input, PD0 & PD2-PD7 keep state
-	DDRD &= ~DRAM_A9_PD_MASK;
-#endif
 	/*
 	for (int pin = 2; pin < 18; pin++)
 		pinMode(pin, INPUT);
@@ -174,11 +176,12 @@ inline void setAddressBus(int adr)
 {
 	// bit0-5 to PB0-5
 	PORTB = (PORTB & ~DRAM_A_PB_MASK) | (((adr >> 0) << DRAM_A_PB_SHIFT) & DRAM_A_PB_MASK);
+#ifndef _BUS_A9_ENABLE
 	// bit6-8 to PD5-7
 	PORTD = (PORTD & ~DRAM_A_PD_MASK) | (((adr >> 6) << DRAM_A_PD_SHIFT) & DRAM_A_PD_MASK);
-#ifdef _BUS_A9_ENABLE
-	// bit9 to PD1
-	PORTD = (PORTD & ~DRAM_A9_PD_MASK) | (((adr >> 9) << DRAM_A9_PD_SHIFT) & DRAM_A9_PD_MASK);
+#else
+	// bit6-8 to PD5-7, bit9 to PD1
+	PORTD = (PORTD & ~(DRAM_A_PD_MASK | DRAM_A9_PD_MASK)) | (((adr >> 6) << DRAM_A_PD_SHIFT) & DRAM_A_PD_MASK) | (((adr >> 9) << DRAM_A9_PD_SHIFT) & DRAM_A9_PD_MASK);
 #endif
 	/*
 	digitalWrite(DRAM_A0, (adr >> 0) & 1);
@@ -316,6 +319,7 @@ inline void setupBus(void)
 	nocol = 0;
 	colshift = 0;
 	colset = 0;
+	rowset = 0;
 	if (dramConfig <= MAX_DRAMCONF_1BIT)
 	{ // 1bit DRAM
 		prepareTest1();
@@ -326,24 +330,35 @@ inline void setupBus(void)
 			// nocol = 0;
 			// colshift = 0;
 			// colset = 0;
+			// rowset = 0;
 			break;
 		case DRAMCONF_32X1L:
 			// abus_size = 8;
 			nocol = 1;
 			// colshift = 0;
 			colset = 0 << 7;
+			// rowset = 0;
 			break;
 		case DRAMCONF_32X1H:
 			// abus_size = 8;
 			nocol = 1;
 			// colshift = 0;
 			colset = 1 << 7;
+			// rowset = 0;
+			break;
+		case DRAMCONF_64X1:
+			// abus_size = 8;
+			// nocol = 0;
+			// colshift = 0;
+			colset = 1 << 8;
+			rowset = 1 << 8;
 			break;
 		case DRAMCONF_256X1:
 			abus_size = 9;
 			// nocol = 0;
 			// colshift = 0;
 			// colset = 0;
+			// rowset = 0;
 			break;
 		default:
 			break;
@@ -359,12 +374,14 @@ inline void setupBus(void)
 			nocol = 2;
 			colshift = 1;
 			// colset = 0;
+			// rowset = 0;
 			break;
 		case DRAMCONF_256X4:
 			abus_size = 9;
 			// nocol = 0;
 			// colshift = 0;
 			// colset = 0;
+			// rowset = 0;
 			break;
 #ifdef _4M_DRAM_ENABLE
 		case DRAMCONF_1024X4:
@@ -372,6 +389,7 @@ inline void setupBus(void)
 			// nocol = 0;
 			// colshift = 0;
 			// colset = 0;
+			// rowset = 0;
 			break;
 #endif
 		default:
@@ -384,14 +402,15 @@ bool testWriteAndVerify1(const char *testname, int value)
 {
 	for (int c = 0; c < (1 << (abus_size - nocol)); c++)
 	{
-		int col = (c | colset) << colshift;
-		for (int row = 0; row < (1 << abus_size); row++)
+		int col = (c << colshift) | colset;
+		for (int r = 0; r < (1 << abus_size); r++)
 		{
+			int row = r | rowset;
 			writeDram1(row, col, value);
 			if (value != readDram1(row, col))
 			{
 				disableDramBus();
-				failedTestDisp(testname, row, c);
+				failedTestDisp(testname, r, c);
 				return true;
 			}
 		}
@@ -403,14 +422,15 @@ bool testWriteAndVerify4(const char *testname, int value)
 {
 	for (int c = 0; c < (1 << (abus_size - nocol)); c++)
 	{
-		int col = (c | colset) << colshift;
-		for (int row = 0; row < (1 << abus_size); row++)
+		int col = (c << colshift) | colset;
+		for (int r = 0; r < (1 << abus_size); r++)
 		{
+			int row = r | rowset;
 			writeDram4(row, col, value);
 			if (value != readDram4(row, col))
 			{
 				disableDramBus();
-				failedTestDisp(testname, row, c);
+				failedTestDisp(testname, r, c);
 				return true;
 			}
 		}
@@ -423,14 +443,15 @@ bool testWriteAndVerifyAlternatelyInvert1(const char *testname, int value)
 	value &= 1;
 	for (int c = 0; c < (1 << (abus_size - nocol)); c++)
 	{
-		int col = (c | colset) << colshift;
-		for (int row = 0; row < (1 << abus_size); row++)
+		int col = (c << colshift) | colset;
+		for (int r = 0; r < (1 << abus_size); r++)
 		{
+			int row = r | rowset;
 			writeDram1(row, col, value);
 			if (value != readDram1(row, col))
 			{
 				disableDramBus();
-				failedTestDisp(testname, row, c);
+				failedTestDisp(testname, r, c);
 				return true;
 			}
 			value ^= 1;
@@ -444,14 +465,15 @@ bool testWriteAndVerifyAlternatelyInvert4(const char *testname, int value)
 	value &= 0xf;
 	for (int c = 0; c < (1 << (abus_size - nocol)); c++)
 	{
-		int col = (c | colset) << colshift;
-		for (int row = 0; row < (1 << abus_size); row++)
+		int col = (c << colshift) | colset;
+		for (int r = 0; r < (1 << abus_size); r++)
 		{
+			int row = r | rowset;
 			writeDram4(row, col, value);
 			if (value != readDram4(row, col))
 			{
 				disableDramBus();
-				failedTestDisp(testname, row, c);
+				failedTestDisp(testname, r, c);
 				return true;
 			}
 			value ^= 0xf;
@@ -464,9 +486,10 @@ bool testWriteOnly1(int value)
 {
 	for (int c = 0; c < (1 << (abus_size - nocol)); c++)
 	{
-		int col = (c | colset) << colshift;
-		for (int row = 0; row < (1 << abus_size); row++)
+		int col = (c << colshift) | colset;
+		for (int r = 0; r < (1 << abus_size); r++)
 		{
+			int row = r | rowset;
 			writeDram1(row, col, value);
 		}
 	}
@@ -477,9 +500,10 @@ bool testWriteOnly4(int value)
 {
 	for (int c = 0; c < (1 << (abus_size - nocol)); c++)
 	{
-		int col = (c | colset) << colshift;
-		for (int row = 0; row < (1 << abus_size); row++)
+		int col = (c << colshift) | colset;
+		for (int r = 0; r < (1 << abus_size); r++)
 		{
+			int row = r | rowset;
 			writeDram4(row, col, value);
 		}
 	}
@@ -490,13 +514,14 @@ bool testVerifyOnly1(const char *testname, int value)
 {
 	for (int c = 0; c < (1 << (abus_size - nocol)); c++)
 	{
-		int col = (c | colset) << colshift;
-		for (int row = 0; row < (1 << abus_size); row++)
+		int col = (c << colshift) | colset;
+		for (int r = 0; r < (1 << abus_size); r++)
 		{
+			int row = r | rowset;
 			if (value != readDram1(row, col))
 			{
 				disableDramBus();
-				failedTestDisp(testname, row, c);
+				failedTestDisp(testname, r, c);
 				return true;
 			}
 		}
@@ -508,13 +533,14 @@ bool testVerifyOnly4(const char *testname, int value)
 {
 	for (int c = 0; c < (1 << (abus_size - nocol)); c++)
 	{
-		int col = (c | colset) << colshift;
-		for (int row = 0; row < (1 << abus_size); row++)
+		int col = (c << colshift) | colset;
+		for (int r = 0; r < (1 << abus_size); r++)
 		{
+			int row = r | rowset;
 			if (value != readDram4(row, col))
 			{
 				disableDramBus();
-				failedTestDisp(testname, row, c);
+				failedTestDisp(testname, r, c);
 				return true;
 			}
 		}
@@ -524,40 +550,42 @@ bool testVerifyOnly4(const char *testname, int value)
 
 bool testRowAddress1(const char *testname, int value)
 {
-	int br, cr, row;
+	int br, cr, r, row;
 	value &= 1;
 	testWriteOnly1(value);
 	for (br = 0; br < abus_size + 1; br++)
 	{
-		row = _BV(br) >> 1;
+		row = (_BV(br) >> 1) | rowset;
 		writeDram1(row, 0, value ^ 1);
 		for (cr = 0; cr <= br; cr++)
 		{
-			row = _BV(cr) >> 1;
+			r = _BV(cr) >> 1;
+			row = r | rowset;
 			if (readDram1(row, 0) != (value ^ 1))
 			{
 				disableDramBus();
-				failedTestDisp(testname, row, 0);
+				failedTestDisp(testname, r, 0);
 				return true;
 			}
 		}
 		for (; cr < abus_size + 1; cr++)
 		{
-			row = _BV(cr) >> 1;
+			r = _BV(cr) >> 1;
+			row = r | rowset;
 			if (readDram1(row, 0) != value)
 			{
 				disableDramBus();
-				failedTestDisp(testname, row, 0);
+				failedTestDisp(testname, r, 0);
 				return true;
 			}
 		}
 	}
-	for (row = 3; row < _BV(abus_size); row++)
+	for (r = 3; r < _BV(abus_size); r++)
 	{
 		bool skip = false;
 		for (cr = 2; cr < abus_size; cr++)
 		{
-			if (row == _BV(cr))
+			if (r == _BV(cr))
 			{
 				skip = true;
 				break;
@@ -565,10 +593,11 @@ bool testRowAddress1(const char *testname, int value)
 		}
 		if (skip)
 			continue;
+		row = r | rowset;
 		if (readDram1(row, 0) != value)
 		{
 			disableDramBus();
-			failedTestDisp(testname, row, 0);
+			failedTestDisp(testname, r, 0);
 			return true;
 		}
 	}
@@ -583,11 +612,11 @@ bool testColAddress1(const char *testname, int value)
 	for (bc = 0; bc < abus_size - nocol + 1; bc++)
 	{
 		col = _BV(bc) >> 1;
-		writeDram1(0, (col | colset) << colshift, value ^ 1);
+		writeDram1(rowset, (col << colshift) | colset, value ^ 1);
 		for (cc = 0; cc <= bc; cc++)
 		{
 			col = _BV(cc) >> 1;
-			if (readDram1(0, (col | colset) << colshift) != (value ^ 1))
+			if (readDram1(rowset, (col << colshift) | colset) != (value ^ 1))
 			{
 				disableDramBus();
 				failedTestDisp(testname, 0, col);
@@ -597,7 +626,7 @@ bool testColAddress1(const char *testname, int value)
 		for (; cc < abus_size - nocol + 1; cc++)
 		{
 			col = _BV(cc) >> 1;
-			if (readDram1(0, (col | colset) << colshift) != value)
+			if (readDram1(rowset, (col << colshift) | colset) != value)
 			{
 				disableDramBus();
 				failedTestDisp(testname, 0, col);
@@ -618,7 +647,7 @@ bool testColAddress1(const char *testname, int value)
 		}
 		if (skip)
 			continue;
-		if (readDram1(0, (col | colset) << colshift) != value)
+		if (readDram1(rowset, (col << colshift) | colset) != value)
 		{
 			disableDramBus();
 			failedTestDisp(testname, 0, col);
@@ -630,40 +659,42 @@ bool testColAddress1(const char *testname, int value)
 
 bool testRowAddress4(const char *testname, int value)
 {
-	int br, cr, row;
+	int br, cr, r, row;
 	value &= 0xf;
 	testWriteOnly4(value);
 	for (br = 0; br < abus_size + 1; br++)
 	{
-		row = _BV(br) >> 1;
+		row = (_BV(br) >> 1) | rowset;
 		writeDram4(row, 0, value ^ 0xf);
 		for (cr = 0; cr <= br; cr++)
 		{
-			row = _BV(cr) >> 1;
+			r = _BV(cr) >> 1;
+			row = r | rowset;
 			if (readDram4(row, 0) != (value ^ 0xf))
 			{
 				disableDramBus();
-				failedTestDisp(testname, row, 0);
+				failedTestDisp(testname, r, 0);
 				return true;
 			}
 		}
 		for (; cr < abus_size + 1; cr++)
 		{
-			row = _BV(cr) >> 1;
+			r = _BV(cr) >> 1;
+			row = r | rowset;
 			if (readDram4(row, 0) != value)
 			{
 				disableDramBus();
-				failedTestDisp(testname, row, 0);
+				failedTestDisp(testname, r, 0);
 				return true;
 			}
 		}
 	}
-	for (row = 3; row < _BV(abus_size); row++)
+	for (r = 3; r < _BV(abus_size); r++)
 	{
 		bool skip = false;
 		for (cr = 2; cr < abus_size; cr++)
 		{
-			if (row == _BV(cr))
+			if (r == _BV(cr))
 			{
 				skip = true;
 				break;
@@ -671,10 +702,11 @@ bool testRowAddress4(const char *testname, int value)
 		}
 		if (skip)
 			continue;
+		row = r | rowset;
 		if (readDram4(row, 0) != value)
 		{
 			disableDramBus();
-			failedTestDisp(testname, row, 0);
+			failedTestDisp(testname, r, 0);
 			return true;
 		}
 	}
@@ -693,20 +725,20 @@ bool testColAddress4(const char *testname, int value)
 		for (cc = 0; cc <= bc; cc++)
 		{
 			col = _BV(cc) >> 1;
-			if (readDram4(0, (col | colset) << colshift) != (value ^ 0xf))
+			if (readDram4(rowset, (col << colshift) | colset) != (value ^ 0xf))
 			{
 				disableDramBus();
-				failedTestDisp(testname, -1, col);
+				failedTestDisp(testname, 0, col);
 				return true;
 			}
 		}
 		for (; cc < abus_size - nocol; cc++)
 		{
 			col = _BV(cc) >> 1;
-			if (readDram4(0, (col | colset) << colshift) != value)
+			if (readDram4(rowset, (col << colshift) | colset) != value)
 			{
 				disableDramBus();
-				failedTestDisp(testname, -1, col);
+				failedTestDisp(testname, 0, col);
 				return true;
 			}
 		}
@@ -724,7 +756,7 @@ bool testColAddress4(const char *testname, int value)
 		}
 		if (skip)
 			continue;
-		if (readDram4(0, (col | colset) << colshift) != value)
+		if (readDram4(rowset, (col << colshift) | colset) != value)
 		{
 			disableDramBus();
 			failedTestDisp(testname, 0, col);
@@ -739,27 +771,6 @@ void startDramTest(void)
 	char name[DRAWNAME_BUF_SIZE];
 	byte val, maxvals;
 	bool isFailed = false;
-
-	/*
-	checkPowerStatus();
-	if (!powerGood12v && dramConfig == DRAMCONF_16X1)
-	{
-		failedPower12vDisp();
-		waitButtonPressAndRelease();
-		delay(300);
-		dramConfig++;
-		dramConfSelectDisp(false);
-		return;
-	}
-	if (!powerGood5v && checkPowerGood5V)
-	{
-		failedPower5vDisp();
-		waitButtonPressAndRelease();
-		delay(300);
-		dramConfSelectDisp(false);
-		return;
-	}
-	*/
 
 	setupBus();
 	setupDram();
@@ -889,6 +900,7 @@ void startDramTest(void)
 	dramConfSelectDisp(false);
 }
 
+#if 0
 void startVerboseDramTest(void)
 {
 	char name[DRAWNAME_BUF_SIZE], text[DRAWTEXT_BUF_SIZE];
@@ -935,3 +947,4 @@ void startVerboseDramTest(void)
 		}
 	}
 }
+#endif

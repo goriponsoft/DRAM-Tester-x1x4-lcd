@@ -10,7 +10,8 @@ int8_t dramConfig;
 int8_t settingMode;
 byte lastBtn;
 unsigned long pressedTime;
-int8_t abus_size, nocol, colshift, colset;
+int8_t abus_size, nocol, colshift;
+int colset, rowset;
 bool speedyTest4bit, checkPowerGood5V;
 int16_t calibrationValue;
 bool powerGood12v, powerGood5v;
@@ -236,7 +237,7 @@ void loop(void)
 		}
 		break;
 	case SCENE_DRAM_TEST:
-		EEPROM.update(0, dramConfig);
+		EEPROM.update(EEPROM_IDX_DRAMCONF, dramConfig);
 #ifndef _DEMO_MODE
 		startDramTest();
 #else

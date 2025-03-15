@@ -202,12 +202,12 @@ void settingModeDisp(void)
 	{
 	case SETTINGMODE_TESTTYPE_CHG:
 		u8g2_drawStr_P(0, 22, PSTR("4bit DRAM Test:"));
-		u8g2_drawStr_P(85, 22, speedyTest4bit ? PSTR("Speedy") : PSTR("Strict"));
+		u8g2_drawStr_P(80, 22, speedyTest4bit ? PSTR("Speedy") : PSTR("Strict"));
 		// u8g2.drawStr(0, 31, "");
 		break;
 	case SETTINGMODE_POWSRCCHK_CHG:
 		u8g2_drawStr_P(0, 22, PSTR("Power5V Voltage:"));
-		u8g2_drawStr_P(80, 22, checkPowerGood5V ? PSTR("Check") : PSTR("Ignore"));
+		u8g2_drawStr_P(85, 22, checkPowerGood5V ? PSTR("Check") : PSTR("Ignore"));
 		u8g2_drawStr_P(0, 31, checkPowerGood5V ? PSTR(""): PSTR("*Tests may be inaccurate."));
 		break;
 	case SETTINGMODE_EEPROM_ERASE:
