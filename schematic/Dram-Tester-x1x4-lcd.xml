@@ -2,16 +2,16 @@
 <export version="E">
   <design>
     <source>Y:\Project\Dram-Tester-x1x4-lcd\Dram-Tester-x1x4-lcd.kicad_sch</source>
-    <date>2024/02/27 2:47:31</date>
-    <tool>Eeschema 7.0.8</tool>
+    <date>2025/03/17 20:05:09</date>
+    <tool>Eeschema 7.0.11</tool>
     <sheet number="1" name="/" tstamps="/">
       <title_block>
-        <title>1&amp;4 bit support standalone DRAM tester with display.</title>
+        <title>1bit and 4bit support standalone DRAM tester with display</title>
         <company>Goripon Hardware</company>
-        <rev>2</rev>
-        <date>2024-02-09</date>
+        <rev>3</rev>
+        <date>2025-03-17</date>
         <source>Dram-Tester-x1x4-lcd.kicad_sch</source>
-        <comment number="1" value="4116/4164/41256/4532/4416/4464/44256 supported."/>
+        <comment number="1" value="4116/4164/41256/4532/4416/4464/44256/4400 supported."/>
         <comment number="2" value=""/>
         <comment number="3" value=""/>
         <comment number="4" value=""/>
@@ -26,7 +26,7 @@
   <components>
     <comp ref="C1">
       <value>0.1u</value>
-      <footprint>Capacitor_THT:C_Disc_D4.3mm_W1.9mm_P5.00mm</footprint>
+      <footprint>Capacitor_THT:C_Disc_D3.4mm_W2.1mm_P2.50mm</footprint>
       <libsource lib="Device" part="C_Small" description="Unpolarized capacitor, small symbol"/>
       <property name="Sheetname" value=""/>
       <property name="Sheetfile" value="Dram-Tester-x1x4-lcd.kicad_sch"/>
@@ -37,7 +37,7 @@
     </comp>
     <comp ref="C2">
       <value>0.1u</value>
-      <footprint>Capacitor_THT:C_Disc_D4.3mm_W1.9mm_P5.00mm</footprint>
+      <footprint>Capacitor_THT:C_Disc_D3.4mm_W2.1mm_P2.50mm</footprint>
       <libsource lib="Device" part="C_Small" description="Unpolarized capacitor, small symbol"/>
       <property name="Sheetname" value=""/>
       <property name="Sheetfile" value="Dram-Tester-x1x4-lcd.kicad_sch"/>
@@ -48,7 +48,7 @@
     </comp>
     <comp ref="C3">
       <value>0.1u</value>
-      <footprint>Capacitor_THT:C_Disc_D4.3mm_W1.9mm_P5.00mm</footprint>
+      <footprint>Capacitor_THT:C_Disc_D3.4mm_W2.1mm_P2.50mm</footprint>
       <libsource lib="Device" part="C_Small" description="Unpolarized capacitor, small symbol"/>
       <property name="Sheetname" value=""/>
       <property name="Sheetfile" value="Dram-Tester-x1x4-lcd.kicad_sch"/>
@@ -59,7 +59,7 @@
     </comp>
     <comp ref="C4">
       <value>0.1u</value>
-      <footprint>Capacitor_THT:C_Disc_D4.3mm_W1.9mm_P5.00mm</footprint>
+      <footprint>Capacitor_THT:C_Disc_D3.4mm_W2.1mm_P2.50mm</footprint>
       <libsource lib="Device" part="C_Small" description="Unpolarized capacitor, small symbol"/>
       <property name="Sheetname" value=""/>
       <property name="Sheetfile" value="Dram-Tester-x1x4-lcd.kicad_sch"/>
@@ -80,7 +80,7 @@
       <tstamps>b3316767-8acd-4878-a3ba-80a6777e3144</tstamps>
     </comp>
     <comp ref="C6">
-      <value>47u</value>
+      <value>10u</value>
       <footprint>Capacitor_THT:CP_Radial_D5.0mm_P2.00mm</footprint>
       <libsource lib="Device" part="C_Polarized_Small" description="Polarized capacitor, small symbol"/>
       <property name="Sheetname" value=""/>
@@ -102,17 +102,6 @@
       <tstamps>cce0fbd3-989f-47d5-800e-ad6db8cbeb2e</tstamps>
     </comp>
     <comp ref="C8">
-      <value>0.1u</value>
-      <footprint>Capacitor_THT:C_Disc_D4.3mm_W1.9mm_P5.00mm</footprint>
-      <libsource lib="Device" part="C_Small" description="Unpolarized capacitor, small symbol"/>
-      <property name="Sheetname" value=""/>
-      <property name="Sheetfile" value="Dram-Tester-x1x4-lcd.kicad_sch"/>
-      <property name="ki_description" value="Unpolarized capacitor, small symbol"/>
-      <property name="ki_keywords" value="capacitor cap"/>
-      <sheetpath names="/" tstamps="/"/>
-      <tstamps>33dfdc72-f7de-4f18-b82a-40bfcdcb1175</tstamps>
-    </comp>
-    <comp ref="C9">
       <value>470u</value>
       <footprint>Capacitor_THT:CP_Radial_D8.0mm_P3.50mm</footprint>
       <libsource lib="Device" part="C_Polarized_Small" description="Polarized capacitor, small symbol"/>
@@ -122,6 +111,29 @@
       <property name="ki_keywords" value="cap capacitor"/>
       <sheetpath names="/" tstamps="/"/>
       <tstamps>d46d89e3-2245-4f43-8131-617207fdc23b</tstamps>
+    </comp>
+    <comp ref="CN1">
+      <value>MJ-179PH</value>
+      <footprint>ProjectLibrary:MJ179PH</footprint>
+      <datasheet>http://akizukidenshi.com/download/ds/marushin/MJ179PH-MJ180PH.pdf</datasheet>
+      <fields>
+        <field name="Height">11</field>
+        <field name="Manufacturer_Name">Marushin Electric</field>
+        <field name="Manufacturer_Part_Number">MJ-179PH</field>
+      </fields>
+      <libsource lib="ProjectLibrary" part="MJ-179PH" description="DC Power Connector, Jack, 4 A, 1.95 mm, PCB Mount, Through Hole, J=Center-pin/S=Outer-contact"/>
+      <property name="Height" value="11"/>
+      <property name="Manufacturer_Name" value="Marushin Electric"/>
+      <property name="Manufacturer_Part_Number" value="MJ-179PH"/>
+      <property name="Mouser Part Number" value=""/>
+      <property name="Mouser Price/Stock" value=""/>
+      <property name="Arrow Part Number" value=""/>
+      <property name="Arrow Price/Stock" value=""/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="Dram-Tester-x1x4-lcd.kicad_sch"/>
+      <property name="ki_description" value="DC Power Connector, Jack, 4 A, 1.95 mm, PCB Mount, Through Hole, J=Center-pin/S=Outer-contact"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>c61dc74d-d98f-4fa2-b01b-acb4b058cfa9</tstamps>
     </comp>
     <comp ref="D1">
       <value>1N4007</value>
@@ -142,9 +154,9 @@
       <tstamps>9b298190-0db7-40a9-9532-7f7b2c3a7bc6</tstamps>
     </comp>
     <comp ref="IC1">
-      <value>TC7660S</value>
+      <value>TJ7660</value>
       <footprint>ProjectLibrary:DIP8_300mil_FineLongPad</footprint>
-      <datasheet>http://ww1.microchip.com/downloads/en/DeviceDoc/20001467C.pdf</datasheet>
+      <datasheet>https://akizukidenshi.com/goodsaffix/tj7660.pdf</datasheet>
       <fields>
         <field name="Arrow Part Number">TC7660SCPA</field>
         <field name="Arrow Price/Stock">https://www.arrow.com/en/products/tc7660scpa/microchip-technology?region=nac</field>
@@ -168,43 +180,8 @@
       <sheetpath names="/" tstamps="/"/>
       <tstamps>7f34ce30-66f4-415d-9e19-d67f75ce5a9d</tstamps>
     </comp>
-    <comp ref="J1">
-      <value>MJ-179PH</value>
-      <footprint>ProjectLibrary:MJ179PH</footprint>
-      <datasheet>http://akizukidenshi.com/download/ds/marushin/MJ179PH-MJ180PH.pdf</datasheet>
-      <fields>
-        <field name="Height">11</field>
-        <field name="Manufacturer_Name">Marushin Electric</field>
-        <field name="Manufacturer_Part_Number">MJ-179PH</field>
-      </fields>
-      <libsource lib="ProjectLibrary" part="MJ-179PH" description="DC Power Connector, Jack, 4 A, 1.95 mm, PCB Mount, Through Hole, J=Center-pin/S=Outer-contact"/>
-      <property name="Height" value="11"/>
-      <property name="Manufacturer_Name" value="Marushin Electric"/>
-      <property name="Manufacturer_Part_Number" value="MJ-179PH"/>
-      <property name="Mouser Part Number" value=""/>
-      <property name="Mouser Price/Stock" value=""/>
-      <property name="Arrow Part Number" value=""/>
-      <property name="Arrow Price/Stock" value=""/>
-      <property name="Sheetname" value=""/>
-      <property name="Sheetfile" value="Dram-Tester-x1x4-lcd.kicad_sch"/>
-      <property name="ki_description" value="DC Power Connector, Jack, 4 A, 1.95 mm, PCB Mount, Through Hole, J=Center-pin/S=Outer-contact"/>
-      <sheetpath names="/" tstamps="/"/>
-      <tstamps>c61dc74d-d98f-4fa2-b01b-acb4b058cfa9</tstamps>
-    </comp>
-    <comp ref="J2">
-      <value>PS</value>
-      <footprint>Connector_PinHeader_2.54mm:PinHeader_1x02_P2.54mm_Vertical</footprint>
-      <libsource lib="Connector_Generic" part="Conn_01x02" description="Generic connector, single row, 01x02, script generated (kicad-library-utils/schlib/autogen/connector/)"/>
-      <property name="Sheetname" value=""/>
-      <property name="Sheetfile" value="Dram-Tester-x1x4-lcd.kicad_sch"/>
-      <property name="dnp"/>
-      <property name="ki_description" value="Generic connector, single row, 01x02, script generated (kicad-library-utils/schlib/autogen/connector/)"/>
-      <property name="ki_keywords" value="connector"/>
-      <sheetpath names="/" tstamps="/"/>
-      <tstamps>a5d3c14a-b900-4eb7-9303-37ccd5855fa8</tstamps>
-    </comp>
     <comp ref="JP1">
-      <value>Pin Header 1x3pin</value>
+      <value>LEDTYP</value>
       <footprint>Connector_PinHeader_2.54mm:PinHeader_1x03_P2.54mm_Vertical</footprint>
       <libsource lib="Jumper" part="Jumper_3_Open" description="Jumper, 3-pole, both open"/>
       <property name="Sheetname" value=""/>
@@ -226,7 +203,7 @@
       <tstamps>98bbf1d2-5e2b-4643-a16e-5821e0da214c</tstamps>
     </comp>
     <comp ref="LED2">
-      <value>Green</value>
+      <value>SCKTPW</value>
       <footprint>LED_THT:LED_D3.0mm</footprint>
       <libsource lib="Device" part="LED_Small_Filled" description="Light emitting diode, small symbol, filled shape"/>
       <property name="Sheetname" value=""/>
@@ -575,7 +552,7 @@
       <tstamps>30afb9ba-be3d-47e1-957d-6f281a4c6c8d</tstamps>
     </comp>
     <comp ref="U3">
-      <value>I2C OLED Screen 0.91 128x32</value>
+      <value>I2C OLED Screen 0.91inch 128x32dot</value>
       <footprint>ProjectLibrary:I2C_OLED_0.91in_128x32</footprint>
       <libsource lib="ProjectLibrary" part="I2C_OLED_Screen_0.91_128x32" description="I2C OLED Screen 0.91inch 128x32dot SSD1306 controller"/>
       <property name="Sheetname" value=""/>
@@ -688,24 +665,6 @@
         <pin num="2" name="A" type="passive"/>
       </pins>
     </libpart>
-    <libpart lib="Jumper" part="Jumper_2_Bridged">
-      <description>Jumper, 2-pole, closed/bridged</description>
-      <docs>~</docs>
-      <footprints>
-        <fp>Jumper*</fp>
-        <fp>TestPoint*2Pads*</fp>
-        <fp>TestPoint*Bridge*</fp>
-      </footprints>
-      <fields>
-        <field name="Reference">JP</field>
-        <field name="Value">Jumper_2_Bridged</field>
-        <field name="Datasheet">~</field>
-      </fields>
-      <pins>
-        <pin num="1" name="A" type="passive"/>
-        <pin num="2" name="B" type="passive"/>
-      </pins>
-    </libpart>
     <libpart lib="Jumper" part="Jumper_2_Open">
       <description>Jumper, 2-pole, open</description>
       <docs>~</docs>
@@ -816,21 +775,6 @@
         <field name="Value">MountingHole</field>
         <field name="Datasheet">~</field>
       </fields>
-    </libpart>
-    <libpart lib="ProjectLibrary" part="AE-XCL103_Horizontal">
-      <fields>
-        <field name="Reference">IC</field>
-        <field name="Value">AE-XCL103_Horizontal</field>
-        <field name="Footprint">ProjectLibrary:DIP6_300mil_FineLongPad_No3D</field>
-      </fields>
-      <pins>
-        <pin num="1" name="(IN)" type="power_out"/>
-        <pin num="2" name="EN" type="input"/>
-        <pin num="3" name="GND" type="passive"/>
-        <pin num="4" name="IN" type="power_in"/>
-        <pin num="5" name="GND" type="passive"/>
-        <pin num="6" name="OUT" type="power_out"/>
-      </pins>
     </libpart>
     <libpart lib="ProjectLibrary" part="AL12832AWWB-H-U02">
       <description>I2C OLED Screen 0.91inch 128x32dot SSD1306 controller</description>
@@ -1123,29 +1067,27 @@
       <node ref="U1" pin="17" pinfunction="3V3" pintype="power_out"/>
     </net>
     <net code="2" name="+5V">
-      <node ref="C4" pin="1" pintype="passive"/>
+      <node ref="C4" pin="2" pintype="passive"/>
       <node ref="C5" pin="1" pintype="passive"/>
-      <node ref="C9" pin="1" pintype="passive"/>
+      <node ref="C8" pin="1" pintype="passive"/>
       <node ref="SW3" pin="2" pinfunction="COM_1" pintype="passive"/>
       <node ref="U1" pin="27" pinfunction="+5V" pintype="power_out"/>
     </net>
     <net code="3" name="+12V">
       <node ref="C2" pin="2" pintype="passive"/>
-      <node ref="C8" pin="1" pintype="passive"/>
       <node ref="R15" pin="1" pintype="passive"/>
       <node ref="S0" pin="8" pinfunction="VDD" pintype="power_in"/>
       <node ref="U2" pin="3" pinfunction="VOUT+" pintype="power_out"/>
     </net>
     <net code="4" name="-5V">
-      <node ref="C1" pin="2" pintype="passive"/>
+      <node ref="C1" pin="1" pintype="passive"/>
       <node ref="C6" pin="2" pintype="passive"/>
       <node ref="IC1" pin="5" pinfunction="VOUT" pintype="power_out"/>
       <node ref="S0" pin="1" pinfunction="VBB" pintype="power_in"/>
     </net>
     <net code="5" name="/NPPS">
+      <node ref="CN1" pin="3" pinfunction="J" pintype="passive"/>
       <node ref="D1" pin="2" pinfunction="A" pintype="passive"/>
-      <node ref="J1" pin="3" pinfunction="J" pintype="passive"/>
-      <node ref="J2" pin="2" pinfunction="Pin_2" pintype="passive"/>
       <node ref="R17" pin="2" pintype="passive"/>
     </net>
     <net code="6" name="/PS">
@@ -1259,17 +1201,15 @@
       <node ref="U1" pin="22" pinfunction="A3" pintype="bidirectional"/>
     </net>
     <net code="25" name="GND">
-      <node ref="C1" pin="1" pintype="passive"/>
+      <node ref="C1" pin="2" pintype="passive"/>
       <node ref="C2" pin="1" pintype="passive"/>
       <node ref="C3" pin="2" pintype="passive"/>
-      <node ref="C4" pin="2" pintype="passive"/>
+      <node ref="C4" pin="1" pintype="passive"/>
       <node ref="C5" pin="2" pintype="passive"/>
       <node ref="C6" pin="1" pintype="passive"/>
       <node ref="C8" pin="2" pintype="passive"/>
-      <node ref="C9" pin="2" pintype="passive"/>
+      <node ref="CN1" pin="1" pinfunction="S" pintype="passive"/>
       <node ref="IC1" pin="3" pinfunction="GND" pintype="passive"/>
-      <node ref="J1" pin="1" pinfunction="S" pintype="passive"/>
-      <node ref="J2" pin="1" pinfunction="Pin_1" pintype="passive"/>
       <node ref="LED1" pin="1" pinfunction="K" pintype="passive"/>
       <node ref="LED2" pin="1" pinfunction="K" pintype="passive"/>
       <node ref="R16" pin="2" pintype="passive"/>
@@ -1293,17 +1233,17 @@
       <node ref="C7" pin="2" pintype="passive"/>
       <node ref="IC1" pin="4" pinfunction="CAP-" pintype="passive"/>
     </net>
-    <net code="28" name="Net-(JP1-C)">
+    <net code="28" name="Net-(J1-C)">
+      <node ref="U3" pin="1" pinfunction="GND" pintype="power_in"/>
+    </net>
+    <net code="29" name="Net-(J2-C)">
+      <node ref="U3" pin="2" pinfunction="VCC" pintype="power_in"/>
+    </net>
+    <net code="30" name="Net-(JP1-C)">
       <node ref="JP1" pin="2" pinfunction="C" pintype="passive"/>
       <node ref="R18" pin="2" pintype="passive"/>
     </net>
-    <net code="29" name="Net-(JP3-C)">
-      <node ref="U3" pin="1" pinfunction="GND" pintype="power_in"/>
-    </net>
-    <net code="30" name="Net-(JP4-C)">
-      <node ref="U3" pin="2" pinfunction="VCC" pintype="power_in"/>
-    </net>
-    <net code="32" name="Net-(JP5-B)">
+    <net code="32" name="Net-(JP2-B)">
       <node ref="U1" pin="1" pinfunction="D1/TX" pintype="bidirectional"/>
     </net>
     <net code="33" name="Net-(LED1-A)">
@@ -1383,14 +1323,15 @@
       <node ref="S1" pin="8" pinfunction="VDD" pintype="power_in"/>
       <node ref="S2" pin="9" pinfunction="VDD" pintype="power_in"/>
       <node ref="S3" pin="10" pinfunction="VCC" pintype="power_in"/>
+      <node ref="SW3" pin="1" pinfunction="NC_1" pintype="passive"/>
+      <node ref="U2" pin="1" pinfunction="VIN+" pintype="power_in"/>
     </net>
     <net code="51" name="SOCKET_OFF">
       <node ref="JP1" pin="3" pinfunction="B" pintype="passive"/>
       <node ref="SW3" pin="3" pinfunction="NO_1" pintype="passive"/>
     </net>
-    <net code="52" name="SOCKET_PS">
-      <node ref="SW3" pin="1" pinfunction="NC_1" pintype="passive"/>
-      <node ref="U2" pin="1" pinfunction="VIN+" pintype="power_in"/>
+    <net code="52" name="unconnected-(CN1-B-Pad2)">
+      <node ref="CN1" pin="2" pinfunction="B" pintype="passive+no_connect"/>
     </net>
     <net code="53" name="unconnected-(IC1-BOOST-Pad1)">
       <node ref="IC1" pin="1" pinfunction="BOOST" pintype="passive+no_connect"/>
@@ -1401,42 +1342,39 @@
     <net code="55" name="unconnected-(IC1-OSC-Pad7)">
       <node ref="IC1" pin="7" pinfunction="OSC" pintype="passive+no_connect"/>
     </net>
-    <net code="56" name="unconnected-(J1-B-Pad2)">
-      <node ref="J1" pin="2" pinfunction="B" pintype="passive+no_connect"/>
-    </net>
-    <net code="57" name="unconnected-(SW2-ON_2-Pad3)">
+    <net code="56" name="unconnected-(SW2-ON_2-Pad3)">
       <node ref="SW2" pin="3" pinfunction="ON_2" pintype="passive+no_connect"/>
     </net>
-    <net code="58" name="unconnected-(SW3-NO_2-Pad6)">
+    <net code="57" name="unconnected-(SW3-NO_2-Pad6)">
       <node ref="SW3" pin="6" pinfunction="NO_2" pintype="passive+no_connect"/>
     </net>
-    <net code="59" name="unconnected-(U1-AREF-Pad18)">
+    <net code="58" name="unconnected-(U1-AREF-Pad18)">
       <node ref="U1" pin="18" pinfunction="AREF" pintype="input+no_connect"/>
     </net>
-    <net code="60" name="unconnected-(U1-D0{slash}RX-Pad2)">
+    <net code="59" name="unconnected-(U1-D0{slash}RX-Pad2)">
       <node ref="U1" pin="2" pinfunction="D0/RX" pintype="bidirectional+no_connect"/>
     </net>
-    <net code="61" name="unconnected-(U1-~{RESET}-Pad3)">
+    <net code="60" name="unconnected-(U1-~{RESET}-Pad3)">
       <node ref="U1" pin="3" pinfunction="~{RESET}" pintype="input+no_connect"/>
     </net>
-    <net code="62" name="unconnected-(U1-~{RESET}-Pad28)">
+    <net code="61" name="unconnected-(U1-~{RESET}-Pad28)">
       <node ref="U1" pin="28" pinfunction="~{RESET}" pintype="input+no_connect"/>
     </net>
-    <net code="65" name="~{CAS}">
+    <net code="62" name="~{CAS}">
       <node ref="R2" pin="1" pintype="passive"/>
       <node ref="S0" pin="15" pinfunction="~{CAS}" pintype="passive"/>
       <node ref="S1" pin="15" pinfunction="~{CAS}" pintype="passive"/>
       <node ref="S2" pin="16" pinfunction="~{CAS}" pintype="passive"/>
       <node ref="S3" pin="17" pinfunction="~{CAS}" pintype="passive"/>
     </net>
-    <net code="66" name="~{RAS}">
+    <net code="63" name="~{RAS}">
       <node ref="R1" pin="1" pintype="passive"/>
       <node ref="S0" pin="4" pinfunction="~{RAS}" pintype="passive"/>
       <node ref="S1" pin="4" pinfunction="~{RAS}" pintype="passive"/>
       <node ref="S2" pin="5" pinfunction="~{RAS}" pintype="passive"/>
       <node ref="S3" pin="4" pinfunction="~{RAS}" pintype="passive"/>
     </net>
-    <net code="67" name="~{W}">
+    <net code="64" name="~{W}">
       <node ref="R3" pin="1" pintype="passive"/>
       <node ref="S0" pin="3" pinfunction="~{W}" pintype="passive"/>
       <node ref="S1" pin="3" pinfunction="~{W}" pintype="passive"/>
