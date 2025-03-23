@@ -13,7 +13,7 @@
 (Check schematic/bom.xlsx as it may not match the schematic updates)
 |Part Number|Parts|Quantity|
 |:--|:--|--:|
-|C1-C4|Unpolarized capacitor 100nF (Withstand voltage 16V or more.)|5|
+|C1-C4|Unpolarized capacitor 100nF (Withstand voltage 16V or more.)|4|
 |C5,C8|Polarized capacitor 470uF (Withstand voltage 16V or more.)|2|
 |C6,C7|Polarized capacitor 10uF (Withstand voltage 16V or more.)|2|
 |IC1|DC-DC Converter(Charge pump), 8-Pin PDIP "TJ7660"|1|
