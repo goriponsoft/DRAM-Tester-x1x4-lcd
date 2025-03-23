@@ -10,18 +10,20 @@
 
 
 # Components
+(Check schematic/bom.xlsx as it may not match the schematic updates)
 |Part Number|Parts|Quantity|
 |:--|:--|--:|
-|C1-C4,C8|Unpolarized capacitor 100nF (Withstand voltage 16V or more.)|5|
-|C5|Polarized capacitor 470uF (Withstand voltage 16V or more.)|2|
-|C6|Polarized capacitor 47uF (Withstand voltage 16V or more.)|1|
-|C7|Polarized capacitor 10uF (Withstand voltage 16V or more.)|1|
-|IC1|DC-DC Converter, 8-Pin PDIP "TC7660S"|1|
-|J1|DC Power Connector, Jack "MJ-179PH"|1|
+|C1-C4|Unpolarized capacitor 100nF (Withstand voltage 16V or more.)|5|
+|C5,C8|Polarized capacitor 470uF (Withstand voltage 16V or more.)|2|
+|C6,C7|Polarized capacitor 10uF (Withstand voltage 16V or more.)|2|
+|IC1|DC-DC Converter(Charge pump), 8-Pin PDIP "TJ7660"|1|
+|CN1|DC Power Connector, Jack "MJ-179PH"|1|
 |JP1|Pin Header 1x3 and Jumper Pin|1|
+|JP2|Pin Header 1x2 and Jumper Pin|1|
 |LED1|LED, D3.0mm, Yellow (Forward voltage 2.1V)|1|
 |LED2|LED, D3.0mm, Green or Red (Forward voltage 2.1V)|1|
-|R1-R13|Resistor 47 ohm, 1/4 watt, tolerance 5%|13|
+|R1-R11,R19|Resistor 47 ohm, 1/4 watt, tolerance 5%|12|
+|R12,R13|Resistor 47 ohm, 1/6 watt, tolerance 5%|2|
 |R14,R17|Resistor 10K ohm, 1/4 watt, tolerance 5%|2|
 |R15|Resistor 1.5K ohm, 1/4 watt, required low tolerance (ex. 1%)|1|
 |R16|Resistor 750 ohm, 1/4 watt, required low tolerance (ex. 1%)|1|
