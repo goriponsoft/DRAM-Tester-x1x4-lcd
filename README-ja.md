@@ -1,4 +1,6 @@
 # DRAM Tester x1x4 lcd by Goripon Hardware
+![](front.jpg)
+
 [English README is here](https://github.com/goriponsoft/Dram-Tester-x1x4-lcd/blob/main/README.md)
 
 これは4116/4164/41256/4532/4416/4464/44256 DRAMに対応したLCD表示付きのスタンドアロンDRAMテスターです。直接のフォークではありませんが、[zeus074/dramtester](https://github.com/zeus074/dramtester) と [cloudree/DRAM_Tester](https://github.com/cloudree/DRAM_Tester) をベースに作成されています。原作者二人に感謝を。参考にした2つのどちらもGPL3.0ライセンスになっているため、このDRAMテスターもGPL3.0ライセンスで公開します。
@@ -49,6 +51,11 @@ X(旧Twitter): @goriponsoft
 - schematic: KiCAD7用の回路図データです。
 - schematic/production: 基板発注用のガーバーデータです。
 
+
+# 組み立て方
+このページの完成品の写真を参考に、基板のシルク印刷に合わせ、部品を載せてハンダ付けしてください。
+
+Arduino Nano・DCDCコンバータ基板・OLEDディスプレイについては、先に部品側にピンヘッダをハンダ付けして、その後ピンヘッダを基板に差し込んでハンダ付けしてください。それ以外には特別な手順は必要ありませんので、通常の電子回路の組み立て方に準じます。
 
 # 準備
 1. PCにUSBでArduino nanoを接続し、Arduino IDEを使用してコンパイルしたスケッチを書き込むか、PlatformIOやAVRライターを使用してHEXファイルを書き込みます。

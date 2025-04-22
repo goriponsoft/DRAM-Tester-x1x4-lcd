@@ -1,4 +1,5 @@
 # DRAM Tester x1x4 lcd by Goripon Hardware
+![](front.jpg)
 
 [日本語版 README はこちら](https://github.com/goriponsoft/Dram-Tester-x1x4-lcd/blob/main/README-ja.md)
 
@@ -48,6 +49,11 @@
 - firmware/PlatformIO/Dram-Tester-x1x4-lcd/.pio/build/Arduino_nano: Firmware compiled binary. You can write HEX files using AVR programmer.
 - schematic: Schematic data for KICAD7.
 - schematic/production: Gerber data for PCB ordering.
+
+# How to assemble
+Refer to the photo of the finished product on this page and solder and place the components according to the silk screen printing on the board.
+
+For the Arduino Nano, DCDC converter board, and OLED display, first solder the headers to the components, then insert the pin headers into the board and solder them. No other special steps are required, so follow the normal assembly method for electronic circuits.
 
 # Preparation
 1. Connect the Arduino nano to your PC via USB and write the compiled sketch using the Arduino IDE, or write a HEX file using PlatformIO or AVR writer.
