@@ -39,7 +39,7 @@
 |U2|MT3608 DCDC Module|1|
 |U3|I2C OLED Screen 0.91in. 128x32dots|1|
 |-|Pin header for module installation|-|
-|-|9V-12V Center+ ACDC adapter|1|
+|-|9V-12V 1A Center+ ACDC adapter|1|
 
 # Directory
 - firmware: Firmware for Arduino Nano.
@@ -66,7 +66,7 @@ For the Arduino Nano, DCDC converter board, and OLED display, first solder the h
 8. Set the jumper pin of JP1 (socket power LED operation). When 1-2 is shorted, the light turns on when ON, when 2-3 is shorted, the light turns on when OFF, and when the jumper pin is removed, the light turns off all the time.
 
 # How it works
-0. Connect the ACDC adapter (center positive, 9V to 12V) to the DC jack. Although it can be operated by connecting a 5V power supply or PC to the Arduino nano's USB connector, we recommend using an ACDC adapter.
+0. Connect the ACDC adapter (center positive, 9V to 12V, 1A) to the DC jack. Although it can be operated by connecting a 5V power supply or PC to the Arduino nano's USB connector, we recommend using an ACDC adapter.
 1. Turn off socket power switch, then insert DRAM under test into the socket. Insert into SOCKET0 for 4116, SOCKET1 for 4164/41256/4532, SOCKET2 for 4416/4464, and SOCKET3 for 44256. *Please note that if you insert a DRAM other than 4116 type into SOCKET0, it will be damaged.
 2. Turn on socket power switch, check the LCD display, and select DRAM model number by pressing SELECT/ENTER button. The socket into which the DRAM should be inserted will also be displayed on the LCD, so check that it is correct.
 3. Press and hold the SELECT/ENTER button to start the test. *For safety reasons, the buttons cannot be operated while the socket power switch is off.
