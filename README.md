@@ -56,13 +56,13 @@ Refer to the photo of the finished product on this page and solder and place the
 For the Arduino Nano, DCDC converter board, and OLED display, first solder the headers to the components, then insert the pin headers into the board and solder them. No other special steps are required, so follow the normal assembly method for electronic circuits.
 
 # Preparation
-1. Connect the power supply to the board, turn on the main power switch, and measure the voltage of the 3.3V power output of the Arduino Nano with a tester or similar device, and make a note of it.
+1. Connect the power supply to the board (USB connector or DC jack), turn on the main power switch, and measure the 3.3V power output of the Arduino Nano with a voltage tester and make a note of it.
 2. Change "#if 0" to "#if 1" near the beginning of the setup() function in Dram-Tester-x1x4-lcd.cpp (or Dram-Tester-x1x4-lcd.ino), and replace the "3.300" part of the equation that assigns a value to the calibrationValue variable with the voltage you noted down (if you don't mind the error, you can leave it as 3.300, but the voltage check may not work correctly).
 3. Connect the Arduino Nano to the PC via USB, and write the compiled sketch using the Arduino IDE, or write the HEX file using PlatformIO or an AVR writer.
 4. Turn the main power switch on and off on the board, or press the reset button to start the firmware (the modified firmware will run and the voltage correction value will be written to the EEPROM).
-5. Change "#if 1" back to "#if 0" in the source.
+5. Change "#if 1" in the source back to "#if 0". Note that steps 1 to 5 only need to be done the first time, and are not necessary thereafter.
 6. Write the compiled sketch again using the Arduino IDE, or write the HEX file using PlatformIO or AVR writer.
-7. Turn on the main power switch on the board, then turn the tri-pot resistor of the MT3608DCDC converter module while measuring the voltage with a tester to adjust it to 12V. If you do not have a tester, you can also turn on the power switch while pressing the SELECT/ENTER button or reset it to start the setting change mode and display the voltage.
+7. Turn on the main power switch on the board, then turn the tri-pot resistor of the MT3608DCDC converter module while measuring the voltage with a tester to adjust it to 12V. You can also press and hold the SELECT/ENTER button while turning on or resetting the power switch to enter the setting change mode and display the voltage.
 8. Set the jumper pin of JP1 (socket power LED operation). When 1-2 is shorted, the light turns on when ON, when 2-3 is shorted, the light turns on when OFF, and when the jumper pin is removed, the light turns off all the time.
 
 # How it works
