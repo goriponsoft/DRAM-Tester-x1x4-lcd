@@ -56,6 +56,8 @@ Refer to the photo of the finished product on this page and solder and place the
 For the Arduino Nano, DCDC converter board, and OLED display, first solder the headers to the components, then insert the pin headers into the board and solder them. No other special steps are required, so follow the normal assembly method for electronic circuits.
 
 # Preparation
+*For the finished products and kits we distribute, steps 1 to 6 are not necessary because the firmware is already written.
+
 1. Connect the power supply to the board (USB connector or DC jack), turn on the main power switch, and measure the 3.3V power output of the Arduino Nano with a voltage tester and make a note of it.
 2. Change "#if 0" to "#if 1" near the beginning of the setup() function in Dram-Tester-x1x4-lcd.cpp (or Dram-Tester-x1x4-lcd.ino), and replace the "3.300" part of the equation that assigns a value to the calibrationValue variable with the voltage you noted down (if you don't mind the error, you can leave it as 3.300, but the voltage check may not work correctly).
 3. Connect the Arduino Nano to the PC via USB, and write the compiled sketch using the Arduino IDE, or write the HEX file using PlatformIO or an AVR writer.
